@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <h2>Owner Dashboard</h2>
+  {% if flat %}
+    <h4>Your Flat: {{ flat.flat_number }}</h4>
+    <p>Society: {{ flat.society.name }} — {{ flat.society.address }}</p>
+    <h5>Maintenance Bills</h5>
+    <table class="table">
+      <thead><tr><th>Month</th><th>Amount</th><th>Status</th></tr></thead>
+      <tbody>
+        {% for bill in bills %}
+          <tr><td>{{ bill.month }}</td><td>{{ bill.amount }}</td><td>{{ bill.status }}</td></tr>
+        {% empty %}
+          <tr><td colspan="3">No bills found</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No flat assigned to you yet. Contact admin.</p>
+  {% endif %}
+{% endblock %}
